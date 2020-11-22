@@ -42,6 +42,7 @@ const RootQuery = new GraphQLObjectType({
         return Item.findById(id);
       },
     },
+
     institutions: {
       type: new GraphQLList(InstitutionType),
       resolve() {

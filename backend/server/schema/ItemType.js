@@ -1,11 +1,13 @@
 const mongoose = require('mongoose');
 const graphql = require('graphql');
 const UserType = require('./UserType');
+const InstitutionType = require('./InstitutionType');
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLBoolean, GraphQLInt } = graphql;
 
 const Item = mongoose.model('Item');
 const User = mongoose.model('User');
+const Institution = mongoose.model('Institution');
 
 const ItemType = new GraphQLObjectType({
   name: 'Item',
@@ -20,6 +22,15 @@ const ItemType = new GraphQLObjectType({
       },
     },
     accessToken: { type: GraphQLString },
+
+    institution: {
+      type: InstitutionType,
+      resolve(parentValue) {
+        return Institution.findById(parentValue.institution)
+          .then(institution => institution)
+          .catch(err => null);
+      },
+    },
   }),
 });
 
