@@ -16,6 +16,7 @@ const UserType = new GraphQLObjectType({
 
     googleId: { type: GraphQLString },
     picture: { type: GraphQLString },
+    token: { type: GraphQLString },
   }),
 });
 
