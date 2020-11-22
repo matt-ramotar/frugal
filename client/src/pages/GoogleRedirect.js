@@ -11,11 +11,14 @@ export default function GoogleRedirect() {
   const [googleId, setGoogleId] = useState('');
   const [picture, setPicture] = useState('');
 
+  const history = useHistory();
+
   const [upsertGoogleUser] = useMutation(UPSERT_GOOGLE_USER, {
     onCompleted(data) {
       const { id, token } = data.upsertGoogleUser;
       localStorage.setItem('userId', id);
       localStorage.setItem('token', token);
+      history.push('/dashboard');
     },
   });
 
