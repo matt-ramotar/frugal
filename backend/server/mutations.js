@@ -2,6 +2,9 @@ const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } = graphql;
 
 const AuthService = require('../services/auth');
+const ItemService = require('../services/item');
+
+const ItemType = require('./schema/ItemType');
 
 const UserType = require('./schema/UserType');
 
@@ -64,6 +67,18 @@ const mutation = new GraphQLObjectType({
       },
       resolve(_, args) {
         return AuthService.upsertGoogleUser(args);
+      },
+    },
+
+    addItem: {
+      type: ItemType,
+      args: {
+        itemId: { type: GraphQLID },
+        accessToken: { type: GraphQLString },
+        userId: { type: GraphQLID },
+      },
+      resolve(_, args) {
+        return ItemService.addItem(args);
       },
     },
   },
