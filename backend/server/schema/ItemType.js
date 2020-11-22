@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const graphql = require('graphql');
-const UserType = require('./UserType');
+
+const AccountType = require('./AccountType');
 const InstitutionType = require('./InstitutionType');
 
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLBoolean, GraphQLInt } = graphql;
@@ -13,14 +14,7 @@ const ItemType = new GraphQLObjectType({
   name: 'Item',
   fields: () => ({
     id: { type: GraphQLID },
-    user: {
-      type: UserType,
-      resolve(parentValue) {
-        return User.findById(parentValue.user)
-          .then(user => user)
-          .catch(err => null);
-      },
-    },
+
     accessToken: { type: GraphQLString },
 
     institution: {
@@ -29,6 +23,15 @@ const ItemType = new GraphQLObjectType({
         return Institution.findById(parentValue.institution)
           .then(institution => institution)
           .catch(err => null);
+      },
+    },
+
+    accounts: {
+      type: new GraphQLList(AccountType),
+      resolve(parentValue) {
+        return Item.findById(parentValue.id)
+          .populate('accounts')
+          .then(item => item.accounts);
       },
     },
   }),
