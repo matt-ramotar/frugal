@@ -5,10 +5,12 @@ const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList, GraphQLNonNull
 const UserType = require('./UserType');
 const ItemType = require('./ItemType');
 const InstitutionType = require('./InstitutionType');
+const AccountType = require('./AccountType');
 
 const User = mongoose.model('User');
 const Item = mongoose.model('Item');
 const Institution = mongoose.model('Institution');
+const Account = mongoose.model('Account');
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
@@ -55,6 +57,20 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parentValue, { id }) {
         return Institution.findById(id);
+      },
+    },
+    accounts: {
+      type: new GraphQLList(AccountType),
+      resolve() {
+        return Account.find({});
+      },
+    },
+
+    account: {
+      type: AccountType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parentValue, { id }) {
+        return Account.findById(id);
       },
     },
   }),
