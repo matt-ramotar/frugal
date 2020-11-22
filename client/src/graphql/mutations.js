@@ -59,3 +59,11 @@ export const UPSERT_GOOGLE_USER = gql`
     }
   }
 `;
+
+export const ADD_ITEM = gql`
+  mutation addItem($itemId: ID!, $accessToken: String!, $userId: ID!) {
+    addItem(itemId: $itemId, accessToken: $accessToken, userId: $userId) {
+      id
+    }
+  }
+`;
