@@ -5,6 +5,7 @@ mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
 
 const ItemSchema = new Schema({
+  _id: { type: String },
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   accessToken: { type: String },
   institution: { type: Schema.Types.ObjectId, ref: 'Institution' },
