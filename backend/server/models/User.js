@@ -16,6 +16,8 @@ const UserSchema = new Schema({
 
   googleId: { type: String },
   picture: { type: String },
+
+  items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
 });
 
 UserSchema.pre('save', function (next) {
