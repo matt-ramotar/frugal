@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const bcrypt = rquire('bcrypt');
+const bcrypt = require('bcrypt');
 
 const SALT_WORK_FACTOR = 10;
 
