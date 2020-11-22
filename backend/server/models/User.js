@@ -18,6 +18,7 @@ const UserSchema = new Schema({
   picture: { type: String },
 
   items: [{ type: Schema.Types.ObjectId, ref: 'Item' }],
+  accounts: [{ type: Schema.Types.ObjectId, ref: 'Account' }],
 });
 
 UserSchema.pre('save', function (next) {
