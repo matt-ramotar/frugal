@@ -19,7 +19,7 @@ router.post('/create_link_token', async (req, res, next) => {
       client_user_id: userId,
     },
     client_name: 'frugal',
-    products: ['transactions'],
+    products: ['transactions', 'auth', 'identity'],
     country_codes: ['US'],
     language: 'en',
   });
@@ -35,6 +35,7 @@ router.post('/exchange_public_token', async (req, res) => {
   const accessToken = exchange.access_token;
   const itemId = exchange.item_id;
   console.log(accessToken, itemId);
+  res.json({ accessToken, itemId });
 });
 
 module.exports = router;
