@@ -9,6 +9,7 @@ const ItemSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
   accessToken: { type: String },
   institution: { type: Schema.Types.ObjectId, ref: 'Institution' },
+  accounts: [{ type: Schema.Types.ObjectId, ref: 'Account' }],
 });
 
 module.exports = mongoose.model('Item', ItemSchema);
