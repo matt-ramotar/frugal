@@ -1,6 +1,7 @@
 module.exports = {
-  Item: require('./Item'),
-  Institution: require('./Institution'),
-  User: require('./User'),
   Account: require('./Account'),
+  Balance: require('./Balance'),
+  Institution: require('./Institution'),
+  Item: require('./Item'),
+  User: require('./User'),
 };
