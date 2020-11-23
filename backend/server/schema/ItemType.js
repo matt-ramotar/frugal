@@ -17,15 +17,6 @@ const ItemType = new GraphQLObjectType({
 
     accessToken: { type: GraphQLString },
 
-    institution: {
-      type: InstitutionType,
-      resolve(parentValue) {
-        return Institution.findById(parentValue.institution)
-          .then(institution => institution)
-          .catch(err => null);
-      },
-    },
-
     accounts: {
       type: new GraphQLList(AccountType),
       resolve(parentValue) {
