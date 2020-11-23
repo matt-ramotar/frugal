@@ -6,11 +6,13 @@ const UserType = require('./UserType');
 const ItemType = require('./ItemType');
 const InstitutionType = require('./InstitutionType');
 const AccountType = require('./AccountType');
+const BalanceType = require('./BalanceType');
 
 const User = mongoose.model('User');
 const Item = mongoose.model('Item');
 const Institution = mongoose.model('Institution');
 const Account = mongoose.model('Account');
+const Balance = mongoose.model('Balance');
 
 const RootQuery = new GraphQLObjectType({
   name: 'RootQuery',
@@ -71,6 +73,21 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve(parentValue, { id }) {
         return Account.findById(id);
+      },
+    },
+
+    balances: {
+      type: new GraphQLList(BalanceType),
+      resolve() {
+        return Balance.find({});
+      },
+    },
+
+    balance: {
+      type: BalanceType,
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
+      resolve(parentValue, { id }) {
+        return Balance.findById(id);
       },
     },
   }),
