@@ -25,6 +25,7 @@ const AccountType = new GraphQLObjectType({
     officialName: { type: GraphQLString },
     type: { type: GraphQLString },
     subtype: { type: GraphQLString },
+    accessToken: { type: GraphQLString },
   }),
 });
 
