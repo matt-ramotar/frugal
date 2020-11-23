@@ -13,7 +13,7 @@ const addItem = async data => {
     const user = await User.findById(userId);
 
     const item = await Item.create({
-      _id: itemId,
+      plaidItemId: itemId,
       user: user.id,
       accessToken,
     });
@@ -24,8 +24,16 @@ const addItem = async data => {
 
     for (const account of accounts) {
       const { account_id, mask, official_name, subtype, type } = account;
-      const newAccount = await Account.create({ _id: account_id, mask, officialName: official_name, subtype, type });
-      await user.accounts.push(newAccount);
+
+      const newAccount = await Account.create({
+        plaidAccountId: account_id,
+        mask,
+        officialName: official_name,
+        subtype,
+        type,
+      });
+
+      user.accounts.push(newAccount);
     }
 
     await user.save();
