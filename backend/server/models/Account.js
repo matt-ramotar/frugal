@@ -12,6 +12,7 @@ const AccountSchema = new Schema({
   type: { type: String },
   subtype: { type: String },
   balance: { type: Schema.Types.ObjectId, ref: 'Balance' },
+  accessToken: { type: String },
 });
 
 module.exports = mongoose.model('Account', AccountSchema);
