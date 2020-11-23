@@ -5,7 +5,7 @@ mongoose.set('useCreateIndex', true);
 const Schema = mongoose.Schema;
 
 const AccountSchema = new Schema({
-  _id: { type: String },
+  plaidAccountId: { type: String },
   mask: { type: Number },
   institution: { type: Schema.Types.ObjectId, ref: 'Institution' },
   officialName: { type: String },
